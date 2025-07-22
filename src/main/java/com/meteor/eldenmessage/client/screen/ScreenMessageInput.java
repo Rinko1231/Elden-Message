@@ -1,7 +1,6 @@
 package com.meteor.eldenmessage.client.screen;
 
 import com.meteor.eldenmessage.EldenMessage;
-import com.meteor.eldenmessage.common.entity.EntityMessage;
 import com.meteor.eldenmessage.lib.LibWords;
 import com.meteor.eldenmessage.network.NetworkHandler;
 import com.meteor.eldenmessage.network.PacketLeaveMessage;
@@ -13,13 +12,12 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.components.ObjectSelectionList;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.AbstractClientPlayer;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.world.entity.Entity;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.loading.StringUtils;
+import net.minecraft.network.chat.Component;
+
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.fml.loading.StringUtils;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.ArrayList;
@@ -58,7 +56,7 @@ public class ScreenMessageInput extends Screen {
     protected ButtonConfirm confirmButton;
 
     public ScreenMessageInput() {
-        super(new TranslatableComponent("message_input.title"));
+        super(Component.translatable("message_input.title"));
     }
 
     @Override
@@ -79,11 +77,11 @@ public class ScreenMessageInput extends Screen {
         wordListWidget = new WordListWidget(this, this.width - this.width/5 - (this.width/5 + 175), this.height/7, this.height - this.height/7 + 20);
         wordListWidget.setLeftPos(this.width/5 + 175);
 
-        msgPart1 = new WordBox(getFontRenderer(), this.width/5 + 45, this.height/7 + 15 - 2, 120, 14, new TranslatableComponent("msg.part1"), this, wordList1);
-        msgPart2 = new WordBox(getFontRenderer(), this.width/5 + 45, this.height/7 + 35 - 2, 120, 14, new TranslatableComponent("msg.part2"), this, wordList2);
-        msgPart3 = new WordBox(getFontRenderer(), this.width/5 + 45, this.height/7 + 65 - 2, 120, 14, new TranslatableComponent("msg.part3"), this, wordList3);
-        msgPart4 = new WordBox(getFontRenderer(), this.width/5 + 45, this.height/7 + 95 - 2, 120, 14, new TranslatableComponent("msg.part4"), this, wordList4);
-        msgPart5 = new WordBox(getFontRenderer(), this.width/5 + 45, this.height/7 + 115 - 2, 120, 14, new TranslatableComponent("msg.part5"), this, wordList5);
+        msgPart1 = new WordBox(getFontRenderer(), this.width/5 + 45, this.height/7 + 15 - 2, 120, 14, Component.translatable("msg.part1"), this, wordList1);
+        msgPart2 = new WordBox(getFontRenderer(), this.width/5 + 45, this.height/7 + 35 - 2, 120, 14, Component.translatable("msg.part2"), this, wordList2);
+        msgPart3 = new WordBox(getFontRenderer(), this.width/5 + 45, this.height/7 + 65 - 2, 120, 14, Component.translatable("msg.part3"), this, wordList3);
+        msgPart4 = new WordBox(getFontRenderer(), this.width/5 + 45, this.height/7 + 95 - 2, 120, 14, Component.translatable("msg.part4"), this, wordList4);
+        msgPart5 = new WordBox(getFontRenderer(), this.width/5 + 45, this.height/7 + 115 - 2, 120, 14, Component.translatable("msg.part5"), this, wordList5);
 
         if(player.isCreative()){
             msgPart1.setEditable(true);
@@ -93,7 +91,7 @@ public class ScreenMessageInput extends Screen {
             msgPart5.setEditable(true);
         }
 
-        confirmButton = new ButtonConfirm(this.width/5 + 45, this.height/7 + 150, 32, 32, new TranslatableComponent("gui.confirm"),(button) -> {
+        confirmButton = new ButtonConfirm(this.width/5 + 45, this.height/7 + 150, 32, 32, Component.translatable("gui.confirm"),(button) -> {
             if(canConfirm()){
                 int cnt = 0;
                 if(!player.isCreative()){
@@ -104,7 +102,7 @@ public class ScreenMessageInput extends Screen {
                     }
                 }
                 if(cnt >= 5 && !player.isCreative()) {
-                    player.sendMessage(new TranslatableComponent("eldenmessage.maxmessage"), Util.NIL_UUID);
+                    player.sendMessage(Component.translatable("eldenmessage.maxmessage"), Util.NIL_UUID);
                 }else{
                     NetworkHandler.CHANNEL.sendToServer(new PacketLeaveMessage(player.getX(), player.getY(), player.getZ(), getMessage(), player.getUUID()));
                     NetworkHandler.CHANNEL.sendToServer(new PacketNotify());
@@ -113,7 +111,7 @@ public class ScreenMessageInput extends Screen {
             }
         });
 
-        search = new EditBox(getFontRenderer(), this.width/5 + 45, this.height/7 + 135 - 2, 120, 14, new TranslatableComponent("msg.search"));
+        search = new EditBox(getFontRenderer(), this.width/5 + 45, this.height/7 + 135 - 2, 120, 14, Component.translatable("msg.search"));
 
         this.addRenderableWidget(wordListWidget);
         this.addRenderableWidget(confirmButton);

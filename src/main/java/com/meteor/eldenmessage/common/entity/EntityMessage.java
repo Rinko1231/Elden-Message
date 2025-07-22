@@ -54,6 +54,7 @@ public class EntityMessage extends Entity {
         super(ModEntities.MESSAGE.get(), level);
     }
 
+
     @Override
     public void tick() {
         super.tick();

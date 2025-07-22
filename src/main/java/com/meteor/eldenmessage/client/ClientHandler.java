@@ -10,7 +10,7 @@ public class ClientHandler {
     }
 
     private static void registerEntityRenderers() {
-        EntityRenderers.register(ModEntities.MESSAGE.get(), RendererMessage::new);
+        EntityRenderers.register(ModEntities.MESSAGE, RendererMessage::new);
     }
 
 }

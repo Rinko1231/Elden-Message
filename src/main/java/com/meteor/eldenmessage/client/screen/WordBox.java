@@ -3,8 +3,9 @@ package com.meteor.eldenmessage.client.screen;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.network.chat.Component;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+
 
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class WordBox extends EditBox {
 
     @Override
     public boolean mouseClicked(double p_94125_, double p_94126_, int p_94127_) {
-        boolean flag = p_94125_ >= (double)this.x && p_94125_ < (double)(this.x + this.width) && p_94126_ >= (double)this.y && p_94126_ < (double)(this.y + this.height);
+        boolean flag = p_94125_ >= (double)this.getX() && p_94125_ < (double)(this.getX() + this.width) && p_94126_ >= (double)this.getY() && p_94126_ < (double)(this.getY() + this.height);
         if(flag){
             if(parent.selectedMsgPart != this){
                 parent.selectedMsgPart = this;

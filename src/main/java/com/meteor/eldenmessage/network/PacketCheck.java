@@ -31,7 +31,7 @@ public class PacketCheck {
                     new Runnable() {
                         @Override
                         public void run() {
-                            Entity e = Minecraft.getInstance().player.level.getEntity(packet.id);
+                            Entity e = Minecraft.getInstance().player.level().getEntity(packet.id);
                             if(e != null && e instanceof EntityMessage){
                                 EntityMessage message = (EntityMessage) e;
                                 Minecraft.getInstance().setScreen(new ScreenMessageCheck(message, packet.hasLike));

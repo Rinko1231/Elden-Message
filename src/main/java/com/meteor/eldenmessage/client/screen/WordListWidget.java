@@ -8,8 +8,7 @@ import net.minecraft.client.gui.components.ObjectSelectionList;
 import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
+
 
 public class WordListWidget extends ObjectSelectionList<WordListWidget.WordEntry>{
 
@@ -67,13 +66,13 @@ public class WordListWidget extends ObjectSelectionList<WordListWidget.WordEntry
 
         @Override
         public Component getNarration() {
-            return new TranslatableComponent("narrator.select", word);
+            return Component.translatable("narrator.select", word);
         }
 
         @Override
         public void render(PoseStack poseStack, int entryIdx, int top, int left, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean p_194999_5_, float partialTick)
         {
-            Component name = new TextComponent(word);
+            Component name = Component.literal(word);
             Font font = this.parent.getFontRenderer();
             font.draw(poseStack, Language.getInstance().getVisualOrder(FormattedText.composite(font.substrByWidth(name, listWidth))), left + 3, top + 2, 0xFFFFFF);
         }

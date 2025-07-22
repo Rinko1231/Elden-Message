@@ -6,7 +6,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
-import net.minecraftforge.network.PacketDistributor;
+
 import org.apache.commons.compress.utils.Lists;
 
 import java.util.HashMap;
@@ -29,7 +29,7 @@ public class PacketNotify {
     public void handle(MinecraftServer server, ServerPlayer player) {
         server.execute(() -> {
             HashMap<Integer, MessageData> tags = new HashMap<>();
-            for(Entity e : player.getLevel().getAllEntities()){
+            for(Entity e : player.level().getAllEntities()){
                 if(e instanceof EntityMessage){
                     EntityMessage message = (EntityMessage) e;
                     tags.put(e.getId(), new MessageData(e.getId(), message.getMessage(), message.getOwnerName(),

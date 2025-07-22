@@ -38,10 +38,10 @@ public class PacketLeaveMessage {
 
     public void handle(MinecraftServer server, ServerPlayer player) {
         server.execute(() -> {
-            EntityMessage e = new EntityMessage(player.getLevel());
+            EntityMessage e = new EntityMessage(player.level());
             char[] name = new char[7];
             for(int i = 0; i < name.length; i++){
-                name[i] = LibWords.charset.charAt(player.getLevel().random.nextInt(26));
+                name[i] = LibWords.charset.charAt(player.level().random.nextInt(26));
             }
             e.setOwnerName(player.getGameProfile().getName());
             e.setAppearance(String.copyValueOf(name));
@@ -50,7 +50,7 @@ public class PacketLeaveMessage {
             e.setYRot(player.getYRot());
             e.setOwnerUUID(owner);
             e.setMessage(message);
-            player.getLevel().addFreshEntity(e);
+            player.level().addFreshEntity(e);
         });
     }
 

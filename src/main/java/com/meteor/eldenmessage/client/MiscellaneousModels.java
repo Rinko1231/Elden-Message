@@ -15,10 +15,10 @@ public class MiscellaneousModels {
     public BakedModel messageModels;
 
     public void onModelRegister(Consumer<ResourceLocation> consumer) {
-        consumer.accept(new ResourceLocation(LibMisc.MOD_ID, "icon/message"));
+        consumer.accept(ResourceLocation.fromNamespaceAndPath(LibMisc.MOD_ID, "icon/message"));
     }
 
     public void onModelBake(ModelBakery loader, Map<ResourceLocation, BakedModel> map) {
-        messageModels = map.get(new ResourceLocation(LibMisc.MOD_ID, "icon/message"));
+        messageModels = map.get(ResourceLocation.fromNamespaceAndPath(LibMisc.MOD_ID, "icon/message"));
     }
 }

@@ -10,13 +10,14 @@ import net.minecraft.resources.ResourceLocation;
 
 public class ButtonLike extends Button {
 
-    public static final ResourceLocation WIDGETS_LOCATION = new ResourceLocation(LibMisc.MOD_ID, "textures/gui/messageicon.png");
+    public static final ResourceLocation WIDGETS_LOCATION = ResourceLocation.fromNamespaceAndPath(LibMisc.MOD_ID, "textures/gui/messageicon.png");
     private boolean like;
 
-    public ButtonLike(int i, int j, int w, int h, Component component, OnPress onPress, boolean like) {
-        super(i, j, w, h, component, onPress);
-        this.like = like;
+    protected ButtonLike(int x, int y, int width, int height, Component message, OnPress onPress, CreateNarration createNarration, boolean Thelike) {
+        super(x, y, width, height, message, onPress, createNarration);
+        this.like=Thelike;
     }
+
 
     @Override
     public void renderButton(PoseStack p_93676_, int p_93677_, int p_93678_, float p_93679_) {
@@ -27,7 +28,7 @@ public class ButtonLike extends Button {
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
         RenderSystem.enableDepthTest();
-        this.blit(p_93676_, this.x, this.y, like ? 0 : 32, i * 32, 32, 32);
+        this.blit(p_93676_, this.getX(), this.getY(), like ? 0 : 32, i * 32, 32, 32);
     }
 
 }

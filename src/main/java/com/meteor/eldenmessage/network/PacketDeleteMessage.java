@@ -24,7 +24,7 @@ public class PacketDeleteMessage {
 
     public void handle(MinecraftServer server, ServerPlayer player) {
         server.execute(() -> {
-            Entity e = player.level.getEntity(this.messageID);
+            Entity e = player.level().getEntity(this.messageID);
             if(e instanceof EntityMessage){
                 e.setRemoved(Entity.RemovalReason.KILLED);
             }

@@ -2,11 +2,9 @@ package com.meteor.eldenmessage.client.screen;
 
 import com.google.common.collect.Lists;
 import com.meteor.eldenmessage.EldenMessage;
-import com.meteor.eldenmessage.common.entity.EntityMessage;
 import com.meteor.eldenmessage.network.MessageData;
 import com.meteor.eldenmessage.network.NetworkHandler;
 import com.meteor.eldenmessage.network.PacketDeleteMessage;
-import com.meteor.eldenmessage.network.PacketNotify;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -15,13 +13,11 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.world.entity.Entity;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.lwjgl.glfw.GLFW;
 
-import java.util.HashMap;
 import java.util.List;
 
 
@@ -42,8 +38,8 @@ public class ScreenMessageList extends Screen {
     private int maxPage;
 
     public ScreenMessageList() {
-        super(new TranslatableComponent("message_list.title"));
-        this.deleteButton = new TranslatableComponent("gui.delete");
+        super(Component.translatable("message_list.title"));
+        this.deleteButton = Component.translatable("gui.delete");
     }
 
     @Override
@@ -68,11 +64,11 @@ public class ScreenMessageList extends Screen {
             addButtons(this.height/7 + 20 + i * 25, 0);
         }
 
-        prevButton = new ButtonPage(this.width/2 - 80 - 11, this.height/6*5, 22, 22, new TranslatableComponent("gui.prev"), (button) -> {
+        prevButton = new ButtonPage(this.width/2 - 80 - 11, this.height/6*5, 22, 22, Component.translatable("gui.prev"), (button) -> {
             pageDown();
         }, true);
 
-        nextButton = new ButtonPage(this.width/2 + 80 - 6, this.height/6*5, 22, 22, new TranslatableComponent("gui.next"), (button) -> {
+        nextButton = new ButtonPage(this.width/2 + 80 - 6, this.height/6*5, 22, 22, Component.translatable("gui.next"), (button) -> {
             pageUp();
         }, false);
 
@@ -165,12 +161,12 @@ public class ScreenMessageList extends Screen {
                 double x = tag.x;
                 double y = tag.y;
                 double z = tag.z;
-                this.drawString(poseStack, this.font, message, this.width/6 + 12, button.y, 16777215);
+                this.drawString(poseStack, this.font, message, this.width/6 + 12, button.getY(), 16777215);
                 this.drawString(poseStack, this.font,
                         String.format("x:%.2f y:%.2f z:%.2f  Owner:%s L:%d D:%d",
                                 x,y,z,
                                 owner_name, like, dislike),
-                        this.width/6 + 12, button.y + 12, 16777215);
+                        this.width/6 + 12, button.getY() + 12, 16777215);
             }
         }
         this.drawString(poseStack, this.font, String.format("%d / %d", curPage + 1, maxPage + 1), this.width/2 - 12, this.height/6*5 + 5, 16777215);

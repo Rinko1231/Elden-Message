@@ -3,7 +3,7 @@ package com.meteor.eldenmessage.network;
 import com.meteor.eldenmessage.common.entity.EntityMessage;
 import net.minecraft.Util;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.TranslatableComponent;
+
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
@@ -45,7 +45,7 @@ public class PacketLike {
                     message.addLike(name);
                     UUID owner = message.getOwnerUUID();
                     if(owner != null){
-                        Player p = e.getLevel().getPlayerByUUID(owner);
+                        Player p = e.level().getPlayerByUUID(owner);
                         if(p != null && p != player){
                             p.heal(5f);
                             p.sendMessage(new TranslatableComponent("eldenmessage.recievelike"), Util.NIL_UUID);

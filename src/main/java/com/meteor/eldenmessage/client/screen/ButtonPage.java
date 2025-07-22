@@ -27,6 +27,6 @@ public class ButtonPage extends Button {
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
         RenderSystem.enableDepthTest();
-        this.blit(p_93676_, this.x, this.y, prev ? 24 : 0 , i*22, 14, 22);
+        this.blit(p_93676_, this.getX(), this.getY(), prev ? 24 : 0 , i*22, 14, 22);
     }
 }

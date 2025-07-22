@@ -53,12 +53,7 @@ public class PacketSync {
     public static class Handler {
         public static void handle(PacketSync packet) {
             Minecraft.getInstance().execute(
-                    new Runnable() {
-                        @Override
-                        public void run() {
-                            EldenMessage.tagsMap = packet.data;
-                        }
-                    }
+                    () -> EldenMessage.tagsMap = packet.data
             );
         }
     }

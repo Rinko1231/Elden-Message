@@ -13,11 +13,14 @@ import net.minecraft.client.gui.components.MultiLineLabel;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.*;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.lwjgl.glfw.GLFW;
 
+import java.awt.*;
 import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
@@ -34,11 +37,11 @@ public class ScreenMessageCheck extends Screen {
     private final List<Button> buttons = Lists.newArrayList();
 
     public ScreenMessageCheck(EntityMessage message, boolean hasLike) {
-        super(new TranslatableComponent("message_screen.title"));
+        super(Component.translatable("message_screen.title"));
         this.entityMessage = message;
         this.hasLike = hasLike;
-        this.likeButton = new TranslatableComponent("gui.like");
-        this.dislikeButton = new TranslatableComponent("gui.dislike");
+        this.likeButton = Component.translatable("gui.like");
+        this.dislikeButton = Component.translatable("gui.dislike");
     }
 
     @Override
@@ -87,7 +90,7 @@ public class ScreenMessageCheck extends Screen {
     @Override
     protected void init() {
         super.init();
-        this.message = MultiLineLabel.create(this.font, new TextComponent("前有希望 /n 正因如此别停下来啊"), this.width - 50);
+        this.message = MultiLineLabel.create(this.font, Component.literal("前有希望 /n 正因如此别停下来啊"), this.width - 50);
         int j = this.height/6 + 20;
         this.buttons.clear();
         if(!hasLike){
